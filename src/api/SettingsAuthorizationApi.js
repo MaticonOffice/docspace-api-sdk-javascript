@@ -1,0 +1,125 @@
+﻿/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+import ApiClient from "../ApiClient";
+import AuthServiceRequestsArrayWrapper from '../models/AuthServiceRequestsArrayWrapper';
+import AuthServiceRequestsDto from '../models/AuthServiceRequestsDto';
+import BooleanWrapper from '../models/BooleanWrapper';
+
+/**
+* SettingsAuthorization service.
+* @module api/SettingsAuthorizationApi
+* @version 3.2.0
+*/
+export default class SettingsAuthorizationApi {
+
+    /**
+    * Constructs a new SettingsAuthorizationApi. 
+    * @alias module:api/SettingsAuthorizationApi
+    * @class
+    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+    * default to {@link module:ApiClient#instance} if unspecified.
+    */
+    constructor(apiClient) {
+        this.apiClient = apiClient || ApiClient.instance;
+    }
+
+
+    /**
+     * Callback function to receive the result of the getAuthServices operation.
+     * @callback module:api/SettingsAuthorizationApi~getAuthServicesCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/AuthServiceRequestsArrayWrapper} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Get the authorization services
+     * Returns the authorization services.
+     * @param {module:api/SettingsAuthorizationApi~getAuthServicesCallback} callback The callback function, accepting three arguments: error, data, response
+     * REST API Reference for {{operationId}} operation
+     * @see {{vendorExtensions.x-seealsoUrl}}
+     * data is of type: {@link module:models/AuthServiceRequestsArrayWrapper}
+     */
+    getAuthServices(callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId'];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = AuthServiceRequestsArrayWrapper;
+      return this.apiClient.callApi(
+        '/api/2.0/settings/authservice', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the saveAuthKeys operation.
+     * @callback module:api/SettingsAuthorizationApi~saveAuthKeysCallback
+     * @param {String} error Error message, if any.
+     * @param {module:models/BooleanWrapper} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Save the authorization keys
+     * Saves the authorization keys.
+     * @param {Object} opts Optional parameters
+     * @param {module:models/AuthServiceRequestsDto} [authServiceRequestsDto] 
+     * @param {module:api/SettingsAuthorizationApi~saveAuthKeysCallback} callback The callback function, accepting three arguments: error, data, response
+     * REST API Reference for {{operationId}} operation
+     * @see {{vendorExtensions.x-seealsoUrl}}
+     * data is of type: {@link module:models/BooleanWrapper}
+     */
+    saveAuthKeys(opts, callback) {
+      opts = opts || {};
+      let postBody = opts['authServiceRequestsDto'];
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['Basic', 'OAuth2', 'ApiKeyBearer', 'asc_auth_key', 'Bearer', 'OpenId'];
+      let contentTypes = ['application/json'];
+      let accepts = ['application/json'];
+      let returnType = BooleanWrapper;
+      return this.apiClient.callApi(
+        '/api/2.0/settings/authservice', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+
+}

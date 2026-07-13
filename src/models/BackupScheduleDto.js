@@ -1,0 +1,140 @@
+﻿/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+import ApiClient from '../ApiClient';
+import BackupStorageType from './BackupStorageType';
+import Cron from './Cron';
+import ItemKeyValuePairObjectObject from './ItemKeyValuePairObjectObject';
+
+/**
+ * The BackupScheduleDto model module.
+ * @module models/BackupScheduleDto
+ * @version 3.2.0
+ */
+class BackupScheduleDto {
+    /**
+     * Constructs a new <code>BackupScheduleDto</code>.
+     * The backup schedule parameters.
+     * @alias module:models/BackupScheduleDto
+     */
+    constructor() { 
+        
+        BackupScheduleDto.initialize(this);
+    }
+
+    /**
+     * Initializes the fields of this object.
+     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
+     * Only for internal use.
+     */
+    static initialize(obj) { 
+    }
+
+    /**
+     * Constructs a <code>BackupScheduleDto</code> from a plain JavaScript object, optionally creating a new instance.
+     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @param {module:models/BackupScheduleDto} obj Optional instance to populate.
+     * @return {module:models/BackupScheduleDto} The populated <code>BackupScheduleDto</code> instance.
+     */
+    static constructFromObject(data, obj) {
+        if (data) {
+            obj = obj || new BackupScheduleDto();
+
+            if (data.hasOwnProperty('storageType')) {
+                obj['storageType'] = BackupStorageType.constructFromObject(data['storageType']);
+            }
+            if (data.hasOwnProperty('storageParams')) {
+                obj['storageParams'] = ApiClient.convertToType(data['storageParams'], [ItemKeyValuePairObjectObject]);
+            }
+            if (data.hasOwnProperty('backupsStored')) {
+                obj['backupsStored'] = ApiClient.convertToType(data['backupsStored'], 'Number');
+            }
+            if (data.hasOwnProperty('cronParams')) {
+                obj['cronParams'] = Cron.constructFromObject(data['cronParams']);
+            }
+            if (data.hasOwnProperty('dump')) {
+                obj['dump'] = ApiClient.convertToType(data['dump'], 'Boolean');
+            }
+        }
+        return obj;
+    }
+
+    /**
+     * Validates the JSON data with respect to <code>BackupScheduleDto</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>BackupScheduleDto</code>.
+     */
+    static validateJSON(data) {
+        if (data['storageParams']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['storageParams'])) {
+                throw new Error("Expected the field `storageParams` to be an array in the JSON data but got " + data['storageParams']);
+            }
+            // validate the optional field `storageParams` (array)
+            for (const item of data['storageParams']) {
+                ItemKeyValuePairObjectObject.validateJSON(item);
+            };
+        }
+        // validate the optional field `cronParams`
+        if (data['cronParams']) { // data not null
+          Cron.validateJSON(data['cronParams']);
+        }
+
+        return true;
+    }
+
+
+}
+
+
+
+/**
+ * @member {module:models/BackupStorageType} storageType
+ */
+BackupScheduleDto.prototype['storageType'] = undefined;
+
+/**
+ * The backup storage parameters.
+ * @member {Array.<module:models/ItemKeyValuePairObjectObject>} storageParams
+ */
+BackupScheduleDto.prototype['storageParams'] = undefined;
+
+/**
+ * The maximum number of the stored backup copies.
+ * @member {Number} backupsStored
+ */
+BackupScheduleDto.prototype['backupsStored'] = undefined;
+
+/**
+ * @member {module:models/Cron} cronParams
+ */
+BackupScheduleDto.prototype['cronParams'] = undefined;
+
+/**
+ * Specifies if a dump will be created or not.
+ * @member {Boolean} dump
+ */
+BackupScheduleDto.prototype['dump'] = undefined;
+
+
+
+
+
+
+export default BackupScheduleDto;
+

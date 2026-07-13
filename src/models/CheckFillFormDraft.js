@@ -1,0 +1,120 @@
+﻿/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+import ApiClient from '../ApiClient';
+
+/**
+ * The CheckFillFormDraft model module.
+ * @module models/CheckFillFormDraft
+ * @version 3.2.0
+ */
+class CheckFillFormDraft {
+    /**
+     * Constructs a new <code>CheckFillFormDraft</code>.
+     * The parameters for checking the form draft filling.
+     * @alias module:models/CheckFillFormDraft
+     */
+    constructor() { 
+        
+        CheckFillFormDraft.initialize(this);
+    }
+
+    /**
+     * Initializes the fields of this object.
+     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
+     * Only for internal use.
+     */
+    static initialize(obj) { 
+    }
+
+    /**
+     * Constructs a <code>CheckFillFormDraft</code> from a plain JavaScript object, optionally creating a new instance.
+     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @param {module:models/CheckFillFormDraft} obj Optional instance to populate.
+     * @return {module:models/CheckFillFormDraft} The populated <code>CheckFillFormDraft</code> instance.
+     */
+    static constructFromObject(data, obj) {
+        if (data) {
+            obj = obj || new CheckFillFormDraft();
+
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'Number');
+            }
+            if (data.hasOwnProperty('action')) {
+                obj['action'] = ApiClient.convertToType(data['action'], 'String');
+            }
+            if (data.hasOwnProperty('requestView')) {
+                obj['requestView'] = ApiClient.convertToType(data['requestView'], 'Boolean');
+            }
+            if (data.hasOwnProperty('requestEmbedded')) {
+                obj['requestEmbedded'] = ApiClient.convertToType(data['requestEmbedded'], 'Boolean');
+            }
+        }
+        return obj;
+    }
+
+    /**
+     * Validates the JSON data with respect to <code>CheckFillFormDraft</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>CheckFillFormDraft</code>.
+     */
+    static validateJSON(data) {
+        // ensure the json data is a string
+        if (data['action'] && !(typeof data['action'] === 'string' || data['action'] instanceof String)) {
+            throw new Error("Expected the field `action` to be a primitive type in the JSON string but got " + data['action']);
+        }
+
+        return true;
+    }
+
+
+}
+
+
+
+/**
+ * The file version of the form draft.
+ * @member {Number} version
+ */
+CheckFillFormDraft.prototype['version'] = undefined;
+
+/**
+ * The action with the form draft.
+ * @member {String} action
+ */
+CheckFillFormDraft.prototype['action'] = undefined;
+
+/**
+ * Specifies whether to request the form for viewing or not.
+ * @member {Boolean} requestView
+ */
+CheckFillFormDraft.prototype['requestView'] = undefined;
+
+/**
+ * Specifies whether to request an embedded form or not.
+ * @member {Boolean} requestEmbedded
+ */
+CheckFillFormDraft.prototype['requestEmbedded'] = undefined;
+
+
+
+
+
+
+export default CheckFillFormDraft;
+

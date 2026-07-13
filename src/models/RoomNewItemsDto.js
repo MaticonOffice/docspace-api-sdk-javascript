@@ -1,0 +1,112 @@
+﻿/**
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+import ApiClient from '../ApiClient';
+import FileEntryDto from './FileEntryDto';
+
+/**
+ * The RoomNewItemsDto model module.
+ * @module models/RoomNewItemsDto
+ * @version 3.2.0
+ */
+class RoomNewItemsDto {
+    /**
+     * Constructs a new <code>RoomNewItemsDto</code>.
+     * The room new items information.
+     * @alias module:models/RoomNewItemsDto
+     */
+    constructor() { 
+        
+        RoomNewItemsDto.initialize(this);
+    }
+
+    /**
+     * Initializes the fields of this object.
+     * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
+     * Only for internal use.
+     */
+    static initialize(obj) { 
+    }
+
+    /**
+     * Constructs a <code>RoomNewItemsDto</code> from a plain JavaScript object, optionally creating a new instance.
+     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @param {module:models/RoomNewItemsDto} obj Optional instance to populate.
+     * @return {module:models/RoomNewItemsDto} The populated <code>RoomNewItemsDto</code> instance.
+     */
+    static constructFromObject(data, obj) {
+        if (data) {
+            obj = obj || new RoomNewItemsDto();
+
+            if (data.hasOwnProperty('room')) {
+                obj['room'] = FileEntryDto.constructFromObject(data['room']);
+            }
+            if (data.hasOwnProperty('items')) {
+                obj['items'] = ApiClient.convertToType(data['items'], [FileEntryDto]);
+            }
+        }
+        return obj;
+    }
+
+    /**
+     * Validates the JSON data with respect to <code>RoomNewItemsDto</code>.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>RoomNewItemsDto</code>.
+     */
+    static validateJSON(data) {
+        // validate the optional field `room`
+        if (data['room']) { // data not null
+          FileEntryDto.validateJSON(data['room']);
+        }
+        if (data['items']) { // data not null
+            // ensure the json data is an array
+            if (!Array.isArray(data['items'])) {
+                throw new Error("Expected the field `items` to be an array in the JSON data but got " + data['items']);
+            }
+            // validate the optional field `items` (array)
+            for (const item of data['items']) {
+                FileEntryDto.validateJSON(item);
+            };
+        }
+
+        return true;
+    }
+
+
+}
+
+
+
+/**
+ * @member {module:models/FileEntryDto} room
+ */
+RoomNewItemsDto.prototype['room'] = undefined;
+
+/**
+ * The list of file entry items.
+ * @member {Array.<module:models/FileEntryDto>} items
+ */
+RoomNewItemsDto.prototype['items'] = undefined;
+
+
+
+
+
+
+export default RoomNewItemsDto;
+
